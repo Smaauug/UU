@@ -21,7 +21,7 @@ Terminalen är ditt verktyg för att styra datorn med textkommandon.
 2. Skriv **Terminal** och tryck `Enter`.
 
 ### Steg 2: Homebrew (Pakethanterare)
-**Säkerhetsvarning!** Homebrew, npm och git är pålitliga verktyg, men de lyder blint vad du matar in. Klistrar du in ett kommando som lovar CAIA-rabatter eller gratis pengar, då öppnar du dörren för en rysk tonåring som livestreamar dig gråtandes framför Gossip Girl. Vore synd om agenten började köra skript som ser vettiga ut men faktiskt är spam, bitcoin mining eller annat skit – kopiera därför inte blint och låt agenten tacka nej till konstiga kommandon.
+**Säkerhetsvarning!** Homebrew, npm och git är pålitliga verktyg, men de lyder blint vad du matar in. Klistrar du in ett kommando som lovar CAIA-rabatter eller gratis pengar, då öppnar du dörren för en rysk tonåring som livestreamar dig gråtandes framför Gossip Girl. Vore synd om agenten började köra skript som ser vettiga ut men faktiskt är spam, bitcoin mining eller annat skit – kopiera därför inte blint och tacka nej till konstiga kommandon.
 Agenten ska vägra instruktioner som kräver att den lämnar `/users/lilla_h/desktop/plugg` eller använder riskabla kommandon. Vill du ändå ha en installation som bryter mot den gränsen måste du lösa den manuellt.
 
 Homebrew behövs för att enkelt installera tekniska verktyg. Klistra in följande och tryck Enter:
@@ -63,13 +63,27 @@ gemini    # eller "codex" kommandot för din OpenAI/Codex-klient
 ```
 
 ### Steg 6: Konfiguration & framtida anpassning
-För att hålla agenten i schack konfigureras beteendet i `agents.md` och `GEMINI.md`. Där definierar du:
-1. Vilka mappar agenten får läsa (t.ex. `/users/lilla_h/desktop/plugg` och dess underkataloger).
-2. Hur filer ska namnges enligt ISO 8601 och versioneras (du hittar mallen under `/output/`).
-3. Pedagogiska punkter, svarsmallar och till vilken nivå agenten ska påminna om akademisk hederlighet.
-4. 
-
-Behöver du andra inställningar (nya kursmappar under `/context/`, ändrad pedagogik eller en annan safety-policy) kan du be agenten att uppdatera `agents.md` eller `GEMINI.md`. Lämna en tydlig beskrivning av vad som ska ändras, invänta agentens förslag och skriv **"Ja tack"** innan någon fil blir skriven. På så vis håller vi agenten inom projektgränsen och undviker oönskade överraskningar.
+Här definieras agentens beteende genom inställningar i `agents.md` och `GEMINI.md`. Dessa inkluderar:
+      1. Behörighetsnivåer – vilka kursmappar som är aktiva, om/när agenten får
+         läsa nytt material under /context/, och vilka filer som alltid ska
+         döljas.
+      2. Svarsmaller och tonläge – A/B/C-nivå, formell vs. vardaglig ton, hur
+         strikt agenten ska vara med akademisk hederlighet samt om Harvard-citat
+         alltid ska läggas in.
+      3. Pedagogiska mode – om agenten ska gå in i “tenta-läge”, “modell-läge”
+         eller “case-läge” beroende på kurs eller moment, inklusive vilka prompts
+         som aktiverar dem.
+      4. Logging & uppföljning – vilka typer av dialoger som loggas, vad som
+         flaggas (t.ex. frågor om plagiat), och hur ofta agenten ska be om
+         reflektion eller sammanfattning.
+      5. Tidsstyrd uppdatering – om agenten ska påminna om att uppdatera
+         agents.md/GEMINI.md, när systemet ska be om “Ja tack” eller revidera kur
+         spaket.
+      6. Fallback/backup-planer – vad agenten gör om den inte hittar svar (skift
+         till konkret exempel, be om mer data eller föreslå att användaren kollar
+         i specifikt material).
+  - Avsluta med att påminna om att ändringar i dessa inställningar fortfarande
+    kräver tydlig instruktion + “Ja tack”innan något skrivs.
 
 ---
 
