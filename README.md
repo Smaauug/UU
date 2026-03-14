@@ -1,4 +1,4 @@
-# 🎓 UU Ekonom-Assistent (Hanna Edition) 💅
+# 🎓 UU Ekonom-Assistent 💅
 
 Välkommen till din strategiska partner för Ekonomie kandidatprogrammet (180 hp) vid Uppsala universitet. Denna intelligenta studieassistent är optimerad för att hantera de unika akademiska och administrativa utmaningarna vid Ekonomikum.
 
@@ -21,11 +21,22 @@ Terminalen är ditt verktyg för att styra datorn med textkommandon.
 2. Skriv **Terminal** och tryck `Enter`.
 
 ### Steg 2: Homebrew (Pakethanterare)
+**Säkerhetsvarning!** Homebrew, npm och git är pålitliga verktyg, men de lyder blint vad du matar in. Klistrar du in ett kommando som lovar CAIA-rabatter eller gratis pengar, då öppnar du dörren för en rysk tonåring som livestreamar dig gråtandes framför Gossip Girl. Vore synd om agenten började köra skript som ser vettiga ut men faktiskt är spam, bitcoin mining eller annat skit – kopiera därför inte blint och låt agenten tacka nej till konstiga kommandon.
+Agenten ska vägra instruktioner som kräver att den lämnar `/users/lilla_h/desktop/plugg` eller använder riskabla kommandon. Vill du ändå ha en installation som bryter mot den gränsen måste du lösa den manuellt.
+
 Homebrew behövs för att enkelt installera tekniska verktyg. Klistra in följande och tryck Enter:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 *Följ instruktionerna på skärmen för att slutföra installationen (t.ex. "Next steps").*
+
+### Hämta koden
+Du kan klona det färdiga projektet och lägga det direkt i `~/desktop/plugg`:
+```bash
+git clone https://github.com/Smaauug/UU.git ~/desktop/plugg
+cd ~/desktop/plugg
+```
+Om `git` inte redan finns på din maskin (macOS skickas ofta med Git via Xcode Command Line Tools) kör `xcode-select --install` eller installera det via Homebrew: `brew install git`.
 
 ### Steg 3: Node.js (Runtime-miljö)
 Installera Node.js via Homebrew:
@@ -34,18 +45,31 @@ brew install node
 ```
 Verifiera med: `node -v`
 
-### Steg 4: Gemini CLI (AI-gränssnittet)
-Installera det officiella gränssnittet globalt:
-```bash
-npm install -g @google/gemini-cli
-```
+### Steg 4: Välj agent (Gemini eller OpenAI/Codex)
+Du får välja mellan två agenttyper:
+- **Gemini CLI**: Glatt grafiskt gränssnitt, fina färger och inbyggd nätuppkoppling. Den är bra när du behöver färska fakta eller vill att agenten ska söka upp information direkt. Installera med:
+  ```bash
+  npm install -g @google/gemini-cli
+  ```
+- **OpenAI/Codex (lokal terminalvariant)**: Smart på regressionsanalyser och tunga statistiska dataset, men den tror fortfarande att det är 2023 och saknar egen webbsökning utan krångliga kringverktyg. Kör den om du fokuserar på kod och analys snarare än research.
+
+Efter installation kör du den agent du valde (`gemini` för Gemini, eller motsvarande startkommando för din OpenAI/Codex-klient) och håll dig inom projektmappen när du interagerar.
 
 ### Steg 5: Starta Agenten
 Navigera till din projektmapp och aktivera assistenten:
 ```bash
 cd /users/lilla_h/desktop/plugg
-gemini
+gemini    # eller "codex" kommandot för din OpenAI/Codex-klient
 ```
+
+### Steg 6: Konfiguration & framtida anpassning
+För att hålla agenten i schack konfigureras beteendet i `agents.md` och `GEMINI.md`. Där definierar du:
+1. Vilka mappar agenten får läsa (t.ex. `/users/lilla_h/desktop/plugg` och dess underkataloger).
+2. Hur filer ska namnges enligt ISO 8601 och versioneras (du hittar mallen under `/output/`).
+3. Pedagogiska punkter, svarsmallar och till vilken nivå agenten ska påminna om akademisk hederlighet.
+4. 
+
+Behöver du andra inställningar (nya kursmappar under `/context/`, ändrad pedagogik eller en annan safety-policy) kan du be agenten att uppdatera `agents.md` eller `GEMINI.md`. Lämna en tydlig beskrivning av vad som ska ändras, invänta agentens förslag och skriv **"Ja tack"** innan någon fil blir skriven. På så vis håller vi agenten inom projektgränsen och undviker oönskade överraskningar.
 
 ---
 
@@ -62,11 +86,13 @@ gemini
 └── README.md          # Denna guide.
 ```
 
-## 🛡️ Säkerhet & Digital Ordning
+## 🛡️ Säkerhet & Konfiguration
 - **Mappbegränsning**: Agenten är strikt isolerad till `/users/lilla_h/desktop/plugg`.
 - **Safety Lock**: Innan en fil skapas eller ändras i `/output/` krävs ett uttryckligt godkännande: **"Ja tack"**.
 - **Filnamngivning**: Alla filer i `/output/` följer ISO 8601 (YYYY-MM-DD), snake_case och versionering (t.ex. `_v01`).
-- **Referenshantering**: Harvard-systemet enligt Uppsala universitets standard är förvalt.
+- **Referenshantering**: Harvard-systemet enligt Uppsala universitets standard gäller för alla inlämningar.
+- **Konfiguration**: `agents.md` och `GEMINI.md` styr pedagogik, säkerhetsregler och vilka mappar som får nås. Du kan be agenten uppdatera dessa filer om du behöver skräddarsy beteendet för nya moment eller skolgång. Förklara vad du vill ändra, få bekräftelse och ge ett tydligt "Ja tack" innan agenten skriver.
+- **Förbjudna kommandon**: Agenten kör aldrig och rekommenderar aldrig farliga operatörskommandon eller externa paketinstallatörer (`rm`, `sudo`, `curl | sh`, `brew`, `npm`, `git`, `wget`, `curl`, `apt`, `pip` etc.). Om du behöver köra något sådant måste du göra det själv utanför agenterollen.
 
 ## 📊 Pedagogik & Modellering
 Agenten använder en deduktiv svarsmodell:
@@ -75,6 +101,8 @@ Agenten använder en deduktiv svarsmodell:
 3. **Praktiskt exempel** (Verklig tillämpning i ekonomi/företag).
 4. **LaTeX-precision**: Matematiska formler (t.ex. $MR=MC$) renderas för högsta tydlighet.
 5. **Visuella Grafer**: Pedagogiska beskrivningar av axlar och kurvskift.
+
+**Prompt för rikare UI**: När du behöver formler, grafer eller tabeller för att förstå ett koncept, genererar assistenten en kort prompt som du kan kopiera till en chatt med bättre grafiskt gränssnitt (t.ex. chatgpt.com). Promptexemplet kan börja med: `Skapa en [formel/graf/tabell] som visar ...` och beskriver vilken data, axel och stil som krävs. På så vis får du både textförklaringen här och en vägledning för att visualisera det i en mer kapabel UI.
 
 ---
 > **Akademisk Hederlighet:** Agenten stödjer din inlärning men varnar proaktivt för plagiat. Allt material som genereras bör bearbetas och formuleras med egna ord inför inlämning. **Lycka till vid Ekonomikum!** 🎓✨
